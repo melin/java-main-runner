@@ -50,6 +50,6 @@ Usage: server.sh {start|status|stop|restart|logback}
        start:             start the xxx server
        stop:              stop the xxx server
        restart:           restart the xxx server
-       logback:               reload logback config file
+       logback:           reload logback config file
        status:            get xxx current status,running or stopped.
 ```
