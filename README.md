@@ -53,3 +53,70 @@ Usage: server.sh {start|status|stop|restart|logback}
        logback:           reload logback config file
        status:            get xxx current status,running or stopped.
 ```
+
+使用方法
+-------------------
+
+新创建maven工程：
+`mvn archetype:generate -DgroupId=com.mycompany.helloworld -DartifactId=helloworld -Dpackage=com.mycompany.helloworld -Dversion=1.0-SNAPSHOT`
+
+添加java-main-runner依赖：
+
+```xml
+<dependency>
+       <groupId>com.github.runner</groupId>
+	<artifactId>java-main-runner</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+添加maven plguin 插件：
+
+```xml
+       		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>false</skipTests>
+					<argLine>-Dfile.encoding=UTF-8</argLine>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+      			<groupId>org.codehaus.mojo</groupId>
+      			<artifactId>exec-maven-plugin</artifactId>
+      			<configuration>
+        			<executable>java</executable>
+        			<mainClass>com.github.runner.ServerStartup</mainClass>
+      			</configuration>
+    		</plugin>
+    		
+    		<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>*.xml</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
+				</configuration>
+			</plugin>
+```
