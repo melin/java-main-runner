@@ -64,7 +64,7 @@ Usage: server.sh {start|status|stop|restart|logback}
 
 ```xml
 <dependency>
-       <groupId>com.github.runner</groupId>
+       	<groupId>com.github.runner</groupId>
 	<artifactId>java-main-runner</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 </dependency>
@@ -120,3 +120,72 @@ Usage: server.sh {start|status|stop|restart|logback}
 				</configuration>
 			</plugin>
 ```
+
+项目分为三种profile，分别为：develipment、test、production，在pom.xml文件中添加配置：
+
+```xml
+	<profiles>
+		<profile>
+			<id>development</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<profiles.active>development</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<os>
+					<family>unix</family>
+				</os>
+			</activation>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>production</id>
+			<properties>
+				<profiles.active>production</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+```
+
+在src/main 目录下添加文件，文件从java-main-runner-test中获取。
+
+assembly/assembly.xml
+scripts/env.sh
+scripts/server.sh
+
+以上配置信息，请具体参考java-main-runner-test工程配置。
+
+
+创建AplicationServer类，继承com.github.runner.support.AbstractAplicationServer。
+
+```java
+public class AplicationServer extends AbstractAplicationServer {
+	private static final Logger LOGGER = LoggerFactory.getLogger(AplicationServer.class);
+
+	@Override
+	public void stop() {
+		LOGGER.info("stop======");
+	}
+	
+	@Override
+	public void start() {
+		LOGGER.info("start======");
+	}
+}
+```
+
+在src/main/resources/META-INF/main-class文件添加AplicationServer类的全路径。
+
+本地开发环境执行以下命令，启动应用程序：
+
+`mvn exec:java`
+
