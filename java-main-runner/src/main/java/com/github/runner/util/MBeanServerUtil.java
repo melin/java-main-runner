@@ -16,13 +16,14 @@ import javax.management.ObjectName;
  */
 public class MBeanServerUtil {
 	public static void registMBean(Object o, String name) {
+		int port = SysProperties.getInt("com.sun.management.jmxremote.port", 4001);
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 		if (null != mbs) {
 			try {
 				mbs.registerMBean(o, new ObjectName(o.getClass().getPackage()
 						.getName()
 						+ ":type="
-						+ o.getClass().getSimpleName()
+						+ o.getClass().getSimpleName() + "-" + port
 						+ (null == name ? ",id=" + o.hashCode() : ",name="
 								+ name + "-" + o.hashCode())));
 			} catch (Exception e) {

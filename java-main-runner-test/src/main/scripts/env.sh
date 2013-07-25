@@ -17,7 +17,7 @@ BASE_HOME=$BASE_DIR
 SERVER_NAME="xxx"
 
 #Ueap JMX port
-export JMX_PORT=9123
+export JMX_PORT=4001
 export CLASSPATH=$BASE_DIR/conf:$(ls $BASE_DIR/lib/*.jar | tr '\n' :)
 
 #UEAP jvm args

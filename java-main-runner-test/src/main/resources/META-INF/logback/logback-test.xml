@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
+	<contextName>logback-4001</contextName>
+	<jmxConfigurator />
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">  
      	<file>${BASE_HOME}/logs/server.log</file>  
      	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  

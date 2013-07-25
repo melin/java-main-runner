@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <included>
-
+	<contextName>logback-4001</contextName>
+	<jmxConfigurator />
+	
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d %p [%c] - &lt;%m&gt;%n</pattern>

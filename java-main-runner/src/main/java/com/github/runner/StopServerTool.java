@@ -6,6 +6,7 @@
 package com.github.runner;
 
 import com.github.runner.support.AbstractShellTool;
+import com.github.runner.util.SysProperties;
 
 /**
  *
@@ -19,7 +20,8 @@ public class StopServerTool extends AbstractShellTool {
     	int index = className.lastIndexOf(".");
     	String packageName = className.substring(0, index);
     	String simpleName = className.substring(index+1);
-    	brokerName = packageName + ":type=" + simpleName + ",*";
+    	int port = SysProperties.getInt("port", 4001);
+    	brokerName = packageName + ":type=" + simpleName + "-" + port + ",*";
 	}
 	
     public static void main(String[] args) throws Exception {

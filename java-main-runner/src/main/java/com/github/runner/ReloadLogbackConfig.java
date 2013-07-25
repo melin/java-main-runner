@@ -1,6 +1,7 @@
 package com.github.runner;
 
 import com.github.runner.support.AbstractShellTool;
+import com.github.runner.util.SysProperties;
 
 /**
  * 
@@ -15,7 +16,8 @@ public class ReloadLogbackConfig extends AbstractShellTool {
 
 	@Override
 	public String getBrokerName() {
-		return "ch.qos.logback.classic:Name=default,*";
+		int port = SysProperties.getInt("port", 4001);
+		return "ch.qos.logback.classic:Name=logback-" + port + ",*";
 	}
 
 }
