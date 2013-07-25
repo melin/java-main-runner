@@ -39,3 +39,17 @@ mvn install assembly:single
        slf4j-log4j12-1.5.6.jar
        ......
 ```
+
+运行
+-------------------
+
+解压`xxx-bin.tar.gz`文件，进入xxx-bin目录，执行server.sh脚本，脚本提供如下参数：
+
+```bash
+Usage: server.sh {start|status|stop|restart|logback}
+       start:             start the xxx server
+       stop:              stop the xxx server
+       restart:           restart the xxx server
+       logback:               reload logback config file
+       status:            get xxx current status,running or stopped.
+```
