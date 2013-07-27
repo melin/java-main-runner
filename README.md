@@ -192,8 +192,8 @@ public class AplicationServer extends AbstractAplicationServer {
 
 注意
 -------------------
-1：如果要想代码中正确调用./bin/server.sh start命令，需要server.sh把start_server function中最后三行代码替换为
+1：如果通过java代码调用./bin/server.sh start命令，需要把server.sh中start_server function最后三行代码替换为
 `exit 0;`
 
-2：META-INF/logback-*.xml文件中 `<contextName>logback-4001</contextName>`配置，4001与env.sh中JMX_PORT值是一直的，
+2：META-INF/logback-*.xml文件中 `<contextName>logback-4001</contextName>`配置，4001与env.sh中JMX_PORT值是一致的，
 这样可以保证统一机器中可以部署多个应用，只要保证应用之间端口是不一样。
