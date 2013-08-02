@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<included>
+	<contextName>logback-4001</contextName>
+	<jmxConfigurator />
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+     	<file>${BASE_HOME}/logs/server.log</file>  
+     	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+          	<fileNamePattern>${BASE_HOME}/logs/server.log.%d</fileNamePattern>  
+          	<maxHistory>7</maxHistory>  
+     	</rollingPolicy>  
+  
+     	<encoder>  
+          	<pattern>%d %p [%thread] %c - &lt;%m&gt;%n</pattern>
+     	</encoder>  
+	</appender>  
+    
+    <root>
+        <level value="INFO" />
+        <appender-ref ref="FILE" />
+    </root>
+</included>

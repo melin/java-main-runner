@@ -8,6 +8,7 @@
 	<properties>
 		<logback.version>1.0.13</logback.version>
 		<org.slf4j.version>1.7.5</org.slf4j.version>
+		<tomcat.version>7.0.42</tomcat.version>
 	</properties>
 
 	<dependencies>
@@ -25,6 +26,19 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-core</artifactId>
+			<version>${tomcat.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tomcat</groupId>
+			<artifactId>tomcat-jasper</artifactId>
+			<version>${tomcat.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
