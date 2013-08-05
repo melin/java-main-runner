@@ -35,9 +35,9 @@
 			<outputDirectory>/conf</outputDirectory>
 			<includes>
 				<include>META-INF/main-class</include>
-				<include>META-INF/logback/*</include>
-				<include>*.xml</include>
+				<include>**/*.xml</include>
 				<include>*.conf</include>
+				<include>*.properties</include>
 			</includes>
 		</fileSet>
 	</fileSets>

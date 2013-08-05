@@ -72,9 +72,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<configuration>
-					<excludes>
-						<exclude>*.xml</exclude>
-					</excludes>
+					<includes>
+						<include>**/*.class</include>
+					</includes>
 				</configuration>
 			</plugin>
 
