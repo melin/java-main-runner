@@ -19,8 +19,8 @@ import org.apache.catalina.core.StandardThreadExecutor;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.valves.AccessLogValve;
 import org.apache.coyote.AbstractProtocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.juli.logging.Log;
+import org.apache.juli.logging.LogFactory;
 
 import com.github.runner.support.AbstractAplicationServer;
 import com.github.runner.util.SysProperties;
@@ -30,7 +30,7 @@ import com.github.runner.util.SysProperties;
  * @author bsli@ustcinfo.com
  */
 public class TomcatServer extends AbstractAplicationServer {
-	private static final Logger LOGGER = LoggerFactory.getLogger(Tomcat.class);
+	private static final Log log = LogFactory.getLog(TomcatServer.class);
 	
 	private Tomcat tomcat = null;
 	private Properties properties = new Properties();
@@ -41,7 +41,7 @@ public class TomcatServer extends AbstractAplicationServer {
 		
 		int port = Integer.valueOf(properties.getProperty("server.port"));
 		String contextPath = properties.getProperty("server.contextPath");
-		String basePath = SysProperties.getString("base.home");
+		String basePath = SysProperties.getString("BASE_HOME");
 		System.setProperty(Globals.CATALINA_BASE_PROP, basePath);
 		try {
 			tomcat = new Tomcat();
@@ -66,9 +66,9 @@ public class TomcatServer extends AbstractAplicationServer {
 			AccessLogValve logValve = new AccessLogValve();
 			logValve.setPattern("%I %h %l %u %t &quot;%r&quot; %s %b");
 			tomcat.getHost().getPipeline().addValve(logValve);
-			
 			tomcat.setPort(8009);
-			tomcat.addWebapp(contextPath, basePath);
+			log.info("tomcat context path : " + contextPath);
+			tomcat.addWebapp(contextPath, basePath + "/webapp");
 			tomcat.start();
 			
 			new Thread() {
@@ -106,7 +106,7 @@ public class TomcatServer extends AbstractAplicationServer {
 		try {
 			InputStream inputStream = TomcatServer.class.getClassLoader().getResourceAsStream("tomcat.properties");
 			properties.load(inputStream);
-			LOGGER.info("load tomcat.properties.");
+			log.info("load tomcat.properties.");
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
