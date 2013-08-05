@@ -190,6 +190,15 @@ public class AplicationServer extends AbstractAplicationServer {
 `mvn exec:java`
 
 
+
+java-web-runner-test
+-------------------
+
+java-main-runner 添加tomcat嵌入运行功能，请参考java-web-runner-test实例，
+注意assembly.xml中配置：`<exclude>com.github.web.demo:java-web-runner-test</exclude>`
+等于当前工程：groupId:artifactId
+
+
 注意
 -------------------
 1：如果通过java代码调用./bin/server.sh start命令，需要把server.sh中start_server function最后三行代码替换为
