@@ -55,10 +55,10 @@ function start_server() {
     chown -R $AS_USER $LOG_DIR
     
     echo "$JAVA $APP_JVM_ARGS -DBASE_HOME=$BASE_HOME -DSERVER_NAME=$SERVER_NAME -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false \
-   	  -Dcom.sun.management.jmxremote.port=$JMX_PORT -DSERVER_NAME=$SERVER_NAME com.github.runner.ServerStartup $BASE_APP_ARGS"
+   	  -Dcom.sun.management.jmxremote.port=$JMX_PORT -DSERVER_NAME=$SERVER_NAME $BASE_APP_ARGS com.github.runner.ServerStartup"
     sleep 1
     nohup $JAVA $APP_JVM_ARGS -DBASE_HOME=$BASE_HOME -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false \
-   	  -Dcom.sun.management.jmxremote.port=$JMX_PORT com.github.runner.ServerStartup $BASE_APP_ARGS 2>&1 >>$LOG_FILE &	
+   	  -Dcom.sun.management.jmxremote.port=$JMX_PORT $BASE_APP_ARGS com.github.runner.ServerStartup 2>&1 >>$LOG_FILE &	
     echo $! > $PID_FILE
     
     chmod 755 $PID_FILE
@@ -81,9 +81,9 @@ function stop_server() {
 	  	  echo "kill -9 $pid"
 	      kill -9 $pid
 	  else
-	  	  echo "$JAVA -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.StopServerTool"
+	  	  echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.StopServerTool"
     	  sleep 1
-	      $JAVA -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.StopServerTool $@
+	      $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.StopServerTool $@
 	      kill $pid
 	  fi
 	  sleep 3;
@@ -107,9 +107,9 @@ function reload_logback_config() {
         echo "$SERVER_NAME is not running."
         exit 1  
     fi  
-    echo "$JAVA -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig"
+    echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig"
     sleep 1
-    $JAVA $JAVA -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig $@
+    $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig $@
 }
  
 function help() {
