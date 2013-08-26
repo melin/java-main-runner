@@ -28,11 +28,19 @@
 			<outputDirectory>/webapp</outputDirectory>
 		</fileSet>
 		<fileSet>
-			<directory>src/main/resources</directory>
+			<directory>target/classes</directory>
+			<outputDirectory>/webapp/WEB-INF/classes</outputDirectory>
+			<includes>
+				<include>**/*.class</include>
+			</includes>
+		</fileSet>
+		<fileSet>
+			<directory>target/classes</directory>
 			<outputDirectory>/conf</outputDirectory>
 			<includes>
-				<include>META-INF/main-class</include>
-				<include>tomcat.properties</include>
+				<include>META-INF/**</include>
+				<include>*.xml</include>
+				<include>*.properties</include>
 			</includes>
 		</fileSet>
 	</fileSets>
