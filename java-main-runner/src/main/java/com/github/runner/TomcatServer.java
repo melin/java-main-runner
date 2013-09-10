@@ -40,6 +40,7 @@ public class TomcatServer extends AbstractAplicationServer {
 		loadProperties();
 		
 		int port = Integer.valueOf(properties.getProperty("server.port"));
+		int connectorPort = Integer.valueOf(properties.getProperty("connector.port"));
 		String contextPath = properties.getProperty("server.contextPath");
 		String basePath = SysProperties.getString("BASE_HOME");
 		System.setProperty(Globals.CATALINA_BASE_PROP, basePath);
@@ -50,7 +51,7 @@ public class TomcatServer extends AbstractAplicationServer {
 			Service service = tomcat.getService();
 			
 			Connector connector = new Connector("AJP/1.3");
-	        connector.setPort(8009);
+	        connector.setPort(connectorPort);
 	        service.addConnector( connector );
 	        
 	        connector = new Connector("HTTP/1.1");
