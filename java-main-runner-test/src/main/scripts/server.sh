@@ -103,22 +103,31 @@ function status(){
     fi
 }
 
+function dumpThread(){
+    if ! running; then
+        echo "$SERVER_NAME is not running."
+        exit 1  
+    fi  
+    echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ThreadDumpTool"
+    $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ThreadDumpTool $@
+}
+
 function reload_logback_config() {
     if ! running; then
         echo "$SERVER_NAME is not running."
         exit 1  
     fi  
     echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig"
-    sleep 1
     $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig $@
 }
  
 function help() {
-    echo "Usage: server.sh {start|status|stop|restart|logback}" >&2
+    echo "Usage: server.sh {start|status|stop|restart|logback|dumpThread}" >&2
     echo "       start:             start the $SERVER_NAME server"
     echo "       stop:              stop the $SERVER_NAME server"
     echo "       restart:           restart the $SERVER_NAME server"
     echo "       logback:           reload logback config file"
+    echo "       dumpThread:        dump thread info"
     echo "       status:            get $SERVER_NAME current status,running or stopped."
 }
 
@@ -133,6 +142,9 @@ case $command in
         ;;
     logback)
         reload_logback_config $@;
+        ;;
+    dumpThread)
+        dumpThread $@;
         ;;
     status)
     	status $@;

@@ -6,6 +6,8 @@
 package com.github.runner.util;
 
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.ThreadMXBean;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
@@ -104,8 +106,7 @@ public class JMXClient {
         }
         this.connect();
     }
-
-
+    
     public Object invoke(ObjectName name, String operationName, Object[] params, String[] signature)
             throws JMXClientException {
     	tryReconnect();
@@ -116,8 +117,17 @@ public class JMXClient {
             throw new JMXClientException("error occurred when invoke " + name.getClass() + "#" + operationName, e);
         }
     }
-
-
+    
+    public ThreadMXBean getThreadMXBean() throws JMXClientException {
+    	try {
+    		return ManagementFactory.newPlatformMXBeanProxy  
+            	    (this.mbs, ManagementFactory.THREAD_MXBEAN_NAME, ThreadMXBean.class);
+        }
+        catch (Exception e) {
+            throw new JMXClientException("error occurred when get " + ThreadMXBean.class, e);
+        }
+    }
+    
     public ObjectInstance queryMBeanForOne(String name) {
         try {
             return this.queryMBeanForOne(new ObjectName(name));

@@ -19,7 +19,7 @@ abstract public class AbstractShellTool extends ShellTool {
 	@Override
     public void doMain(String methodName) throws Exception {
         String host = SysProperties.getString("host", "127.0.0.1");
-        int port = SysProperties.getInt("port", 9999);
+        int port = SysProperties.getInt("port", 4001);
 
         JMXClient jmxClient = JMXClient.getJMXClient(host, port);
         System.out.println("connected to " + jmxClient.getAddressAsString());
