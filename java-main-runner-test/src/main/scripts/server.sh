@@ -112,6 +112,14 @@ function dumpThread(){
     $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ThreadDumpTool $@
 }
 
+function topBusyThread() {
+    if ! running; then
+        echo "$SERVER_NAME is not running."
+        exit 1
+    fi
+    $BASE_HOME/bin/show-busy-java-threads.sh -p `cat $PID_FILE`
+}
+
 function reload_logback_config() {
     if ! running; then
         echo "$SERVER_NAME is not running."
@@ -122,12 +130,13 @@ function reload_logback_config() {
 }
  
 function help() {
-    echo "Usage: server.sh {start|status|stop|restart|logback|dumpThread}" >&2
+    echo "Usage: server.sh {start|status|stop|restart|logback|dumpThread|topBusyThread}" >&2
     echo "       start:             start the $SERVER_NAME server"
     echo "       stop:              stop the $SERVER_NAME server"
     echo "       restart:           restart the $SERVER_NAME server"
     echo "       logback:           reload logback config file"
     echo "       dumpThread:        dump thread info"
+    echo "       topBusyThread:     show busiest five thread stacks"
     echo "       status:            get $SERVER_NAME current status,running or stopped."
 }
 
@@ -145,6 +154,9 @@ case $command in
         ;;
     dumpThread)
         dumpThread $@;
+        ;;
+    topBusyThread)
+        topBusyThread $@;
         ;;
     status)
     	status $@;

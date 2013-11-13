@@ -46,11 +46,13 @@ mvn install assembly:single
 解压`xxx-bin.tar.gz`文件，进入xxx-bin目录，执行server.sh脚本，脚本提供如下参数：
 
 ```bash
-Usage: server.sh {start|status|stop|restart|logback}
+Usage: server.sh {start|status|stop|restart|logback|dumpThread|topBusyThread}
        start:             start the xxx server
        stop:              stop the xxx server
        restart:           restart the xxx server
        logback:           reload logback config file
+       dumpThread         dump thread info
+       topBusyThread:     show busiest five thread stacks"
        status:            get xxx current status,running or stopped.
 ```
 
