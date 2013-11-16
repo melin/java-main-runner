@@ -19,6 +19,7 @@ import javax.management.MBeanInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.ReflectionException;
 
+import com.github.runner.thread.ThreadPool;
 import com.github.runner.util.SysProperties;
 
 /**
@@ -44,6 +45,13 @@ public abstract class AbstractAplicationServer implements DynamicMBean {
         buildDynamicInfo();  
         mBeanInfo = createMBeanInfo();  
     }  
+	
+	public String threadPool() {
+		String info = ThreadPool.getInstance().info().info();
+		info += "\r\n";
+		info += ThreadPool.getInstance().stats().stats();
+		return info;
+	}
 	
 	public abstract void stop();
 	
@@ -100,8 +108,9 @@ public abstract class AbstractAplicationServer implements DynamicMBean {
 	
 	private void buildDynamicInfo() throws Exception{  
 		attributes.add(new MBeanAttributeInfo("baseHome", "java.lang.String", "安装路径", true, false, false));  
-        operations.add(new MBeanOperationInfo("stop method", this.getClass().getMethod("stop")));  
-    }  
+        operations.add(new MBeanOperationInfo("stop method", this.getClass().getMethod("stop")));
+        operations.add(new MBeanOperationInfo("threadPool info", this.getClass().getMethod("threadPool")));
+    } 
 	
 	private MBeanInfo createMBeanInfo(){  
 		return new MBeanInfo(this.getClass().getName(), this.getClass().getSimpleName() + "Dynamic", 

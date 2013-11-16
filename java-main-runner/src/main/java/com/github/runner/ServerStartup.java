@@ -64,7 +64,7 @@ public class ServerStartup {
 	public static String readClassName() {
 		String fileName = ServerStartup.class.getClassLoader().getResource(".").getPath();
 		fileName += File.separator + "META-INF" + File.separator + "main-class";
-		LOGGER.info("read main-class file path: {}", fileName);
+		LOGGER.debug("read main-class file path: {}", fileName);
 		
 		BufferedReader bufferedReader = null;
 		try {

@@ -12,9 +12,8 @@ package com.github.runner.support;
  */
 public abstract class ShellTool {
 
-
     /** 主功能入口 */
-    abstract public void doMain(String methodName) throws Exception;
+    abstract public Object doMain(String methodName) throws Exception;
 
     abstract public String getBrokerName();
 

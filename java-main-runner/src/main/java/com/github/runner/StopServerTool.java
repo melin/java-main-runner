@@ -15,6 +15,7 @@ import com.github.runner.util.SysProperties;
  */
 public class StopServerTool extends AbstractShellTool {
 	private static String brokerName = "";
+	
 	static {
 		String className = ServerStartup.readClassName();
     	int index = className.lastIndexOf(".");
