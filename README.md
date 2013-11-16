@@ -208,3 +208,22 @@ java-main-runner 添加tomcat嵌入运行功能，请参考java-web-runner-test�
 
 2：META-INF/logback-*.xml文件中 `<contextName>logback-4001</contextName>`配置，4001与env.sh中JMX_PORT值是一致的，
 这样可以保证统一机器中可以部署多个应用，只要保证应用之间端口是不一样。
+
+
+ThreadPool 监控
+-------------------
+提供com.github.runner.thread.ThreadPool创建的ThreadPool，java-main-runner能够监控到线程池相关信息。
+线程池类型为：SAME, CACHED, FIXED, SCALING（暂时不支持）
+
+```bash
+[hadoop@node1 java-main-runner-test-1.0.0-SNAPSHOT]$ ./bin/server.sh  dumpThreadPool
+===============thread pool info=========================
+          name    type   min   max   keepAlive queueSize
+     fixedTest   FIXED     4     4        null        -1
+    cachedTest  CACHED    -1    -1          1m        -1
+
+===============thread pool stats=========================================
+          name   threads   queue  active   rejected   largest   completed
+     fixedTest         0       0       0          0         0           0
+    cachedTest         0       0       0          0         0           0
+```
