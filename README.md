@@ -213,7 +213,8 @@ java-main-runner 添加tomcat嵌入运行功能，请参考java-web-runner-test�
 ThreadPool 监控
 -------------------
 提供com.github.runner.thread.ThreadPool创建的ThreadPool，java-main-runner能够监控到线程池相关信息。
-线程池类型为：SAME, CACHED, FIXED, SCALING（暂时不支持）
+线程池类型为：SAME, CACHED, FIXED, SCALING（暂时不支持）。
+
 参考（elasticsearch threadpool 监控）
 
 ```bash
