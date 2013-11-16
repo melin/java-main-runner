@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.runner.support.AbstractAplicationServer;
+import com.github.runner.thread.ThreadPool;
 
 
 /**
@@ -18,11 +19,14 @@ public class AplicationServer extends AbstractAplicationServer {
 
 	@Override
 	public void stop() {
+		ThreadPool.getInstance().shutdown();
 		LOGGER.info("stop======");
 	}
 	
 	@Override
 	public void start() {
+		ThreadPool.getInstance().buildCached("cachedTest");
+		ThreadPool.getInstance().buildFixed("fixedTest", 4);
 		LOGGER.info("start======");
 	}
 }

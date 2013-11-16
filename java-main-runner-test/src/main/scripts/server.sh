@@ -82,7 +82,6 @@ function stop_server() {
 	  	  echo "kill -9 $pid"
 	      kill -9 $pid
 	  else
-	  	  echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.StopServerTool"
     	  sleep 1
 	      $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.StopServerTool $@
 	      kill $pid
@@ -103,12 +102,19 @@ function status(){
     fi
 }
 
+function dumpThreadPool(){
+    if ! running; then
+        echo "$SERVER_NAME is not running."
+        exit 1  
+    fi  
+    $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.DumpThreadPoolTool $@
+}
+
 function dumpThread(){
     if ! running; then
         echo "$SERVER_NAME is not running."
         exit 1  
     fi  
-    echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ThreadDumpTool"
     $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ThreadDumpTool $@
 }
 
@@ -125,16 +131,16 @@ function reload_logback_config() {
         echo "$SERVER_NAME is not running."
         exit 1  
     fi  
-    echo "$JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig"
     $JAVA -DBASE_HOME=$BASE_HOME -Dhost=127.0.0.1 -Dport=$JMX_PORT com.github.runner.ReloadLogbackConfig $@
 }
  
 function help() {
-    echo "Usage: server.sh {start|status|stop|restart|logback|dumpThread|topBusyThread}" >&2
+    echo "Usage: server.sh {start|status|stop|restart|logback|dumpThreadPool|dumpThread|topBusyThread}" >&2
     echo "       start:             start the $SERVER_NAME server"
     echo "       stop:              stop the $SERVER_NAME server"
     echo "       restart:           restart the $SERVER_NAME server"
     echo "       logback:           reload logback config file"
+    echo "       dumpThreadPool     dump threadpool info & stats"
     echo "       dumpThread:        dump thread info"
     echo "       topBusyThread:     show busiest five thread stacks"
     echo "       status:            get $SERVER_NAME current status,running or stopped."
@@ -151,6 +157,9 @@ case $command in
         ;;
     logback)
         reload_logback_config $@;
+        ;;
+    dumpThreadPool)
+        dumpThreadPool $@;
         ;;
     dumpThread)
         dumpThread $@;
