@@ -16,7 +16,7 @@ import javax.management.ObjectName;
  */
 public class MBeanServerUtil {
 	public static void registMBean(Object o, String name) {
-		int port = SysProperties.getInt("com.sun.management.jmxremote.port", 4001);
+		int port = SystemPropertyUtil.getInt("com.sun.management.jmxremote.port", 4001);
 		MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
 		if (null != mbs) {
 			try {

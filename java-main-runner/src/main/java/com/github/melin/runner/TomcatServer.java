@@ -23,7 +23,7 @@ import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 
 import com.github.melin.runner.support.AbstractAplicationServer;
-import com.github.melin.runner.util.SysProperties;
+import com.github.melin.runner.util.SystemPropertyUtil;
 
 /**
  * Create on @2013-8-2 @上午10:24:02 
@@ -42,7 +42,7 @@ public class TomcatServer extends AbstractAplicationServer {
 		int port = Integer.valueOf(properties.getProperty("server.port"));
 		int connectorPort = Integer.valueOf(properties.getProperty("connector.port"));
 		String contextPath = properties.getProperty("server.contextPath");
-		String basePath = SysProperties.getString("BASE_HOME");
+		String basePath = SystemPropertyUtil.get("BASE_HOME");
 		System.setProperty(Globals.CATALINA_BASE_PROP, basePath);
 		try {
 			tomcat = new Tomcat();

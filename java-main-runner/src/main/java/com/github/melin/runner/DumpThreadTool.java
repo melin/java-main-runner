@@ -11,7 +11,7 @@ import java.util.Locale;
 
 import com.github.melin.runner.util.JMXClient;
 import com.github.melin.runner.util.JMXClientException;
-import com.github.melin.runner.util.SysProperties;
+import com.github.melin.runner.util.SystemPropertyUtil;
 
 /**
  * dump thread info
@@ -26,8 +26,8 @@ public class DumpThreadTool {
 	public static void main(String[] args) {
 		final PrintStream writer = System.out;
 		
-		String host = SysProperties.getString("host", "127.0.0.1");
-        int port = SysProperties.getInt("port", 4001);
+		String host = SystemPropertyUtil.get("host", "127.0.0.1");
+        int port = SystemPropertyUtil.getInt("port", 4001);
 
 		try {
 			JMXClient jmxClient = JMXClient.getJMXClient(host, port);

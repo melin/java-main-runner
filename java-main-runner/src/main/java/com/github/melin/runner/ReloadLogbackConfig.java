@@ -1,7 +1,7 @@
 package com.github.melin.runner;
 
 import com.github.melin.runner.support.AbstractShellTool;
-import com.github.melin.runner.util.SysProperties;
+import com.github.melin.runner.util.SystemPropertyUtil;
 
 /**
  * 
@@ -16,7 +16,7 @@ public class ReloadLogbackConfig extends AbstractShellTool {
 
 	@Override
 	public String getBrokerName() {
-		int port = SysProperties.getInt("port", 4001);
+		int port = SystemPropertyUtil.getInt("port", 4001);
 		return "ch.qos.logback.classic:Name=logback-" + port + ",*";
 	}
 

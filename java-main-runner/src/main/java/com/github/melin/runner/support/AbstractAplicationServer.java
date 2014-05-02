@@ -20,7 +20,7 @@ import javax.management.MBeanOperationInfo;
 import javax.management.ReflectionException;
 
 import com.github.melin.runner.thread.ThreadPool;
-import com.github.melin.runner.util.SysProperties;
+import com.github.melin.runner.util.SystemPropertyUtil;
 
 /**
  * @author bsli123@ustcinfo.com
@@ -62,7 +62,7 @@ public abstract class AbstractAplicationServer implements DynamicMBean {
 			throws AttributeNotFoundException, MBeanException,
 			ReflectionException {
 		if("baseHome".equals(attribute)) 
-			return SysProperties.getString("BASE_HOME");
+			return SystemPropertyUtil.get("BASE_HOME");
 		else
 			return null;
 	}

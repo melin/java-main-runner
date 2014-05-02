@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.github.melin.runner.ServerStartup;
 import com.github.melin.runner.util.JMXClient;
-import com.github.melin.runner.util.SysProperties;
+import com.github.melin.runner.util.SystemPropertyUtil;
 
 /**
  *
@@ -24,8 +24,8 @@ abstract public class AbstractShellTool extends ShellTool {
 	
 	@Override
     public Object doMain(String methodName) throws Exception {
-        String host = SysProperties.getString("host", "127.0.0.1");
-        int port = SysProperties.getInt("port", 4001);
+        String host = SystemPropertyUtil.get("host", "127.0.0.1");
+        int port = SystemPropertyUtil.getInt("port", 4001);
 
         JMXClient jmxClient = JMXClient.getJMXClient(host, port);
         LOGGER.debug("connected to " + jmxClient.getAddressAsString());
