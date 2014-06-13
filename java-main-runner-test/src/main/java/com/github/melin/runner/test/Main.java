@@ -1,11 +1,11 @@
 /**        
  * Copyright (c) 2013 by 苏州科大国创信息技术有限公司.    
  */    
-package com.github.runner.test;
+package com.github.melin.runner.test;
 
 import java.util.concurrent.TimeUnit;
 
-import com.github.runner.util.MBeanServerUtil;
+import com.github.melin.runner.util.MBeanServerUtil;
 
 /**
  * Create on @2013-7-24 @下午4:18:51 

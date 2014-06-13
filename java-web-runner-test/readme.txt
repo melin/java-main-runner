@@ -1,1 +1,1 @@
-mvn install assembly:single
+mvn clean install assembly:single

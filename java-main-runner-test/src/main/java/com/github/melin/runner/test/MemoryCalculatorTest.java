@@ -1,11 +1,11 @@
 /**        
  * Copyright (c) 2013 by 苏州科大国创信息技术有限公司.    
  */    
-package com.github.runner.test;
+package com.github.melin.runner.test;
 
 import java.util.HashMap;
 
-import com.github.runner.support.MemoryCalculator;
+import com.github.melin.runner.support.MemoryCalculator;
 
 /**
  * -javaagent:F:\codes\opensources\github\java-main-runner\java-main-runner\target\java-main-runner-1.0.0-SNAPSHOT.jar

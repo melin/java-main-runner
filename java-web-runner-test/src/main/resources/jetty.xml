@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+
+	<Get name="ThreadPool">
+		<Set name="minThreads" type="int">
+			<Property name="threads.min" default="10" />
+		</Set>
+		<Set name="maxThreads" type="int">
+			<Property name="threads.max" default="200" />
+		</Set>
+		<Set name="idleTimeout" type="int">
+			<Property name="threads.timeout" default="60000" />
+		</Set>
+		<Set name="detailedDump">false</Set>
+	</Get>
+
+	<New id="httpConfig" class="org.eclipse.jetty.server.HttpConfiguration">
+		<Set name="secureScheme">https</Set>
+		<Set name="securePort">
+			<Property name="jetty.secure.port" default="8443" />
+		</Set>
+		<Set name="outputBufferSize">
+			<Property name="jetty.output.buffer.size" default="32768" />
+		</Set>
+		<Set name="requestHeaderSize">
+			<Property name="jetty.request.header.size" default="8192" />
+		</Set>
+		<Set name="responseHeaderSize">
+			<Property name="jetty.response.header.size" default="8192" />
+		</Set>
+		<Set name="sendServerVersion">
+			<Property name="jetty.send.server.version" default="true" />
+		</Set>
+		<Set name="sendDateHeader">
+			<Property name="jetty.send.date.header" default="false" />
+		</Set>
+		<Set name="headerCacheSize">512</Set>
+	</New>
+
+	<Call name="addConnector">
+		<Arg>
+			<New class="org.eclipse.jetty.server.ServerConnector">
+				<Arg name="server">
+					<Ref refid="Server" />
+				</Arg>
+				<Arg name="factories">
+					<Array type="org.eclipse.jetty.server.ConnectionFactory"><Item>
+							<New class="org.eclipse.jetty.server.HttpConnectionFactory">
+								<Arg name="config">
+									<Ref refid="httpConfig" />
+								</Arg>
+							</New>
+						</Item></Array>
+				</Arg>
+				<Set name="host">
+					<Property name="jetty.host" />
+				</Set>
+				<Set name="port">
+					<Property name="jetty.port" default="8090" />
+				</Set>
+				<Set name="idleTimeout">
+					<Property name="http.timeout" default="30000" />
+				</Set>
+				<Set name="soLingerTime">
+					<Property name="http.soLingerTime" default="-1" />
+				</Set>
+			</New>
+		</Arg>
+	</Call>
+
+	<Set name="handler">
+		<New id="Handlers" class="org.eclipse.jetty.server.handler.HandlerCollection">
+			<Set name="handlers">
+				<Array type="org.eclipse.jetty.server.Handler"><Item>
+						<New class="org.eclipse.jetty.webapp.WebAppContext">
+							<Arg>
+								<SystemProperty name="BASE_HOME" />/webapp
+							</Arg>
+							<Arg>/</Arg>
+							<Set name="throwUnavailableOnStartupException">true</Set>
+						</New>
+					</Item></Array>
+			</Set>
+		</New>
+	</Set>
+
+	<Set name="stopAtShutdown">true</Set>
+    <Set name="stopTimeout">5000</Set>
+
+</Configure>

@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	
 	<properties>
-		<tomcat.version>7.0.42</tomcat.version>
+		<jetty.version>9.2.0.v20140526</jetty.version>
 	</properties>
 
 	<dependencies>
@@ -15,21 +15,32 @@
 			<groupId>com.github.runner</groupId>
 			<artifactId>java-main-runner</artifactId>
 			<version>2.0.0-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.apache.tomcat.embed</groupId>
-			<artifactId>tomcat-embed-core</artifactId>
-			<version>${tomcat.version}</version>
-			<scope>provided</scope>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-webapp</artifactId>
+			<version>${jetty.version}</version>
 		</dependency>
+		
 		<dependency>
-			<groupId>org.apache.tomcat</groupId>
-			<artifactId>tomcat-jasper</artifactId>
-			<version>${tomcat.version}</version>
-			<scope>provided</scope>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-continuation</artifactId>
+			<version>${jetty.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-jsp</artifactId>
+			<version>${jetty.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -64,7 +75,7 @@
 				<artifactId>exec-maven-plugin</artifactId>
 				<configuration>
 					<executable>java</executable>
-					<mainClass>com.github.runner.ServerStartup</mainClass>
+					<mainClass>com.github.melin.runner.ServerStartup</mainClass>
 				</configuration>
 			</plugin>
 
