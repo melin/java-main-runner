@@ -5,8 +5,7 @@ package com.github.melin.runner.thread;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import com.twitter.jsr166e.LongAdder;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Create on @2013-11-15 @下午4:01:12 

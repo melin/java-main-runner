@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2013 by 苏州科大国创信息技术有限公司.
- *
- * JMXClientException.java Create on 2013-7-11 上午10:25:02
- */
 package com.github.melin.runner.util;
 
 /**

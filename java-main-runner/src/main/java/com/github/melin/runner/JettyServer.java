@@ -1,6 +1,3 @@
-/**        
- * Copyright (c) 2013 by 苏州科大国创信息技术有限公司.    
- */    
 package com.github.melin.runner;
 
 import java.io.File;
@@ -15,7 +12,7 @@ import com.github.melin.runner.support.AbstractAplicationServer;
 import com.github.melin.runner.util.SystemPropertyUtil;
 
 /**
- * Create on @2013-8-2 @上午10:24:02 
+ *
  * @author bsli@ustcinfo.com
  */
 public class JettyServer extends AbstractAplicationServer {

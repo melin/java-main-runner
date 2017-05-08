@@ -6,11 +6,6 @@ package com.github.melin.runner.common.unit;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
-import org.joda.time.format.PeriodFormat;
-import org.joda.time.format.PeriodFormatter;
-
 import com.github.melin.runner.common.Strings;
 
 /**
@@ -161,19 +156,6 @@ public class TimeValue implements Serializable {
 
    public double getDaysFrac() {
        return daysFrac();
-   }
-
-   private final PeriodFormatter defaultFormatter = PeriodFormat.getDefault()
-           .withParseType(PeriodType.standard());
-
-   public String format() {
-       Period period = new Period(millis());
-       return defaultFormatter.print(period);
-   }
-
-   public String format(PeriodType type) {
-       Period period = new Period(millis());
-       return PeriodFormat.getDefault().withParseType(type).print(period);
    }
 
    @Override

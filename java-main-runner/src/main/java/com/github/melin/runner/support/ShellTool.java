@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2013 by 苏州科大国创信息技术有限公司.
- *
- * ShellTool.java Create on 2013-7-11 上午10:13:05
- */
 package com.github.melin.runner.support;
 
 /**
@@ -12,7 +7,6 @@ package com.github.melin.runner.support;
  */
 public abstract class ShellTool {
 
-    /** 主功能入口 */
     abstract public Object doMain(String methodName) throws Exception;
 
     abstract public String getBrokerName();

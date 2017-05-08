@@ -1,8 +1,3 @@
-/**
- * Copyright (c) 2013 by 苏州科大国创信息技术有限公司.
- *
- * AbstractShellTool.java Create on 2013-7-11 上午10:13:29
- */
 package com.github.melin.runner.support;
 
 import javax.management.ObjectInstance;

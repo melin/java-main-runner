@@ -6,21 +6,12 @@ package com.github.melin.runner.thread;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executor;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.SynchronousQueue;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.github.melin.runner.common.unit.TimeValue;
-import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * Create on @2013-11-15 @下午1:13:11 
@@ -72,7 +63,7 @@ public class ThreadPool {
 		
 		ExecutorHolder holder = null;
 		if(PoolType.CACHED == type) {
-			return new ExecutorHolder(MoreExecutors.sameThreadExecutor(), new Info(name, type));
+			return new ExecutorHolder(Executors.newCachedThreadPool(), new Info(name, type));
 		} else if(PoolType.CACHED == type) {
 			LOGGER.info("creating thread_pool [{}], type [cached], keep_alive [{}]", name, keepAlive);
 			Executor executor = new ThreadPoolExecutor(0, Integer.MAX_VALUE, keepAlive.getSeconds(), TimeUnit.SECONDS, 
